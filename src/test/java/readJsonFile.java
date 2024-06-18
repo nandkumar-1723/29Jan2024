@@ -15,29 +15,24 @@ public class readJsonFile {
 
         FileReader fr = new FileReader("src/main/java/com/arise/Files/practice.json");
         JSONParser jp = new JSONParser();
-        String requestBody = jp.parse(fr).toString();
-        System.out.println(requestBody);
+        String jsonBody = jp.parse(fr).toString();
+        System.out.println(jsonBody);
 
-        //  read the specific json data
-        JSONObject js = new JSONObject(requestBody);
+        // to verify the json data we need to use JSOnObject conceot
+        JSONObject js = new JSONObject(jsonBody);
 
-        //  read the MS firstname
-        String firstname = js.getJSONArray("groupB").getJSONObject(1).get("firstName").toString();
-        System.out.println(firstname);
+        //to print the virat's ipl team
+        String viratTeam = js.getJSONArray("groupA").getJSONObject(0).get("team").toString();
+        System.out.println(viratTeam);
 
-        //  read the KL ipl team
-        Object team = js.getJSONArray("groupB").getJSONObject(0).get("team");
-        System.out.println(team);
+        // to print the ms's ipl salary
+        String salary = js.getJSONArray("groupB").getJSONObject(1).get("salary").toString();
+        System.out.println(" MS salary: "+salary);
 
-        //  read the rohit's IPL team
-        String rohitTeam = js.getJSONArray("groupA").getJSONObject(1).get("team").toString();
-        System.out.println(rohitTeam);
+        String groupA = js.getJSONArray("groupA").getJSONObject(0).toString();
+        System.out.println(groupA);
 
-//       Assignment:
-//1.  read the virat kohli joursy number
-//2.  read the rohit's age
-//3.  read KL' last name
-//4.  read the ms team name
+
 
     }
 
