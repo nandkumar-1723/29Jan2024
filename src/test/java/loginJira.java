@@ -1,6 +1,7 @@
 import io.restassured.*;
 import io.restassured.http.*;
 import io.restassured.response.*;
+import org.json.*;
 import org.json.simple.parser.*;
 import org.testng.annotations.*;
 
@@ -11,7 +12,9 @@ import java.io.*;
  */
 public class loginJira {
 
-    @Test
+    private String cookie;
+
+    @Test(priority = 1)
     public void loginJira() throws IOException, ParseException {
 
         FileReader fr = new FileReader("src/main/java/com/arise/Files/login.json");
@@ -23,8 +26,21 @@ public class loginJira {
                 .contentType(ContentType.JSON)
                 .when().post("/rest/auth/1/session").then().log().all().extract().response();
 
-
         System.out.println("Status code: "+ response.getStatusCode());
+
+        // to print the json response
+        System.out.println(response.asString());
+
+        // to read the jession value from the response
+        JSONObject js = new JSONObject(response.asString());
+         cookie = "JSESSIONID="+js.getJSONObject("session").get("value").toString();
+        System.out.println("Cookie value --> "+cookie);
+
+    }
+
+    @Test (priority = 2)
+    public void CreateJira(){
+        System.out.println(cookie);
 
     }
 
