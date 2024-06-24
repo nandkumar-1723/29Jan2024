@@ -39,8 +39,19 @@ public class loginJira {
     }
 
     @Test (priority = 2)
-    public void CreateJira(){
-        System.out.println(cookie);
+    public void CreateJira() throws IOException, ParseException {
+
+        FileReader fr = new FileReader("src/main/java/com/arise/Files/createStory.json");
+        JSONParser jp = new JSONParser();
+        String jsonBody = jp.parse(fr).toString();
+
+        Response response = RestAssured.given().baseUri("http://localhost:9009").body(jsonBody)
+                .header("Cookie", cookie).contentType(ContentType.JSON)
+                .when().post("/rest/api/2/issue").then().log().all().extract().response();
+
+        System.out.println(response.asString());
+        System.out.println(response.getStatusCode());
+
 
     }
 

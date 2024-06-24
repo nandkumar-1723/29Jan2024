@@ -1,0 +1,11 @@
+{
+  "fields": {
+    "project": {
+      "key": "AM"
+    },
+    "summary": "24th june 2024",
+    "issuetype": {
+      "name": "Story"
+    }
+  }
+}
