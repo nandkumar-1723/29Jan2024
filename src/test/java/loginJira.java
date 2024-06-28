@@ -79,6 +79,13 @@ public class loginJira {
                 .then().log().all().extract().response();
 
     }
+    @Test(priority = 6)
+    public void deleteUserStory(){
+
+        RestAssured.given().baseUri("http://localhost:9009").header("Cookie",cookie)
+                .contentType(ContentType.JSON)
+                .when().delete("/rest/api/2/issue/"+issueId).then().log().all().extract().response();
+    }
 
 
 }
