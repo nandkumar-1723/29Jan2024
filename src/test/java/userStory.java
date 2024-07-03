@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * @author Nandkumar Babar
  */
-public class loginJira {
+public class userStory {
 
     private String cookie;
     private String issueId;
